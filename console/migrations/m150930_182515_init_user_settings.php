@@ -11,6 +11,7 @@ class m150930_182515_init_user_settings extends Migration
             'user_id' => $this->integer()->notNull(),
             'user_set_f1' => $this->boolean()->notNull(),
             'user_set_f2' => $this->boolean()->notNull(),
+            'user_image_url' => $this->string()->notNull()->defaultValue(''),
 
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),

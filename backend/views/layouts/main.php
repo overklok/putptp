@@ -36,14 +36,14 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Home', 'url' => ['/main/default/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/user/default/login']];
     } else {
         $menuItems[] = [
             'label' => 'Logout (' . Yii::$app->user->identity->user_name . ')',
-            'url' => ['/site/logout'],
+            'url' => ['/user/default/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];
     }

@@ -12,13 +12,11 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'books' => [
-            'class' => 'app\modules\books\BooksModule',
-        ],
+
     ],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modules\user\models\User',
             'enableAutoLogin' => true,
         ],
         'log' => [
@@ -29,9 +27,6 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
         ],
     ],
     'params' => $params,

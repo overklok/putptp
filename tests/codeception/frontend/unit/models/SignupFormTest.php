@@ -5,7 +5,7 @@ namespace tests\codeception\frontend\unit\models;
 use tests\codeception\frontend\unit\DbTestCase;
 use tests\codeception\common\fixtures\UserFixture;
 use Codeception\Specify;
-use frontend\models\SignupForm;
+use frontend\modules\user\models\SignupForm;
 
 class SignupFormTest extends DbTestCase
 {
@@ -14,7 +14,7 @@ class SignupFormTest extends DbTestCase
 
     public function testCorrectSignup()
     {
-        $model = new SignupForm([
+        $model = new \frontend\modules\user\models\SignupForm([
             'username' => 'some_username',
             'email' => 'some_email@example.com',
             'password' => 'some_password',
@@ -22,7 +22,7 @@ class SignupFormTest extends DbTestCase
 
         $user = $model->signup();
 
-        $this->assertInstanceOf('common\models\User', $user, 'user should be valid');
+        $this->assertInstanceOf('common\modules\user\models\User', $user, 'user should be valid');
 
         expect('username should be correct', $user->username)->equals('some_username');
         expect('email should be correct', $user->email)->equals('some_email@example.com');
@@ -31,7 +31,7 @@ class SignupFormTest extends DbTestCase
 
     public function testNotCorrectSignup()
     {
-        $model = new SignupForm([
+        $model = new \frontend\modules\user\models\SignupForm([
             'username' => 'troy.becker',
             'email' => 'nicolas.dianna@hotmail.com',
             'password' => 'some_password',

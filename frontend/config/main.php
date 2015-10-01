@@ -7,13 +7,18 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-practical-frontend',
+    'id' => 'putptp',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'help' => [
+            'class' => 'app\modules\help\Module',
+        ],
+    ],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modules\user\models\User',
             'enableAutoLogin' => true,
         ],
         'log' => [
@@ -25,9 +30,6 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ]
     ],
     'params' => $params,
 ];
