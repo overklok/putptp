@@ -9,7 +9,7 @@ use common\modules\user\models\LoginForm;
 use yii\filters\VerbFilter;
 class DefaultController extends Controller
 {
-    /**
+      /**
      * @inheritdoc
      */
     public function actions()

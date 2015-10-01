@@ -40,7 +40,7 @@ class SignupForm extends Model
         return [
             ['user_name', 'filter', 'filter' => 'trim'],
             ['user_name', 'required'],
-            ['user_name', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['user_name', 'unique', 'targetClass' => '\common\modules\user\models\User', 'message' => 'This username has already been taken.'],
             ['user_name', 'string', 'min' => 2, 'max' => 255],
 
             ['user_first_name', 'filter', 'filter' => 'trim'],
@@ -58,7 +58,7 @@ class SignupForm extends Model
             ['user_email', 'required'],
             ['user_email', 'email'],
             ['user_email', 'string', 'max' => 255],
-            ['user_email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['user_email', 'unique', 'targetClass' => '\common\modules\user\models\User', 'message' => 'This email address has already been taken.'],
 
             ['user_password', 'required'],
             ['user_password', 'string', 'min' => 6],

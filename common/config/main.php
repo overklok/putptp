@@ -19,9 +19,6 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
-        'errorHandler' => [
-            'errorAction' => 'main/default/error',
-        ],
     ],
 
 ];

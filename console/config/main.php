@@ -20,6 +20,9 @@ return [
                 ],
             ],
          ],
+        'errorHandler' => [
+            'errorAction' => 'main/default/error',
+        ],
     ],
     'params' => $params,
 ];
