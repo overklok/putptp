@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\jui\DatePicker;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,13 +18,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
-                <?= $form->field($model, 'username') ?>
+                <?= $form->field($model, 'user_name') ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'user_first_name') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'user_middle_name') ?>
+
+                <?= $form->field($model, 'user_last_name') ?>
+
+                <?= $form->field($model, 'user_password')->passwordInput() ?>
+
+                <?= $form->field($model, 'user_email') ?>
+
+                <?= $form->field($model, 'user_DOB')->widget(yii\jui\DatePicker::classname(), [
+                    'language' => 'ru',
+                    'dateFormat' => 'MM/dd/yyyy',
+                ]) ?>
+
+                <?= $form->field($model, 'user_image')->fileInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
