@@ -3,6 +3,7 @@ namespace app\modules\user\controllers;
 
 use Yii;
 use common\modules\user\models\LoginForm;
+use frontend\modules\user\models\EmailConfirmForm;
 use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
 use frontend\modules\user\models\SignupForm;
@@ -17,6 +18,7 @@ use yii\filters\AccessControl;
  */
 class DefaultController extends Controller
 {
+    /**
     /**
      * @inheritdoc
      */
@@ -44,6 +46,16 @@ class DefaultController extends Controller
                 'actions' => [
                     'logout' => ['post'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -91,15 +103,32 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
+                    Yii::$app->getSession()->setFlash('success', 'Confirm your email address.');
                     return $this->goHome();
-                }
             }
         }
 
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    public function actionEmailConfirm($token)
+    {
+        try {
+            $model = new EmailConfirmForm($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        if ($model->confirmEmail()) {
+            Yii::$app->getSession()->setFlash('success', 'Thanks! Your Email was successfully confirmed.');
+        }
+        else {
+            Yii::$app->getSession()->setFlash('error', 'It was an error while confirming your Email');
+        }
+
+        return $this->goHome();
     }
 
     /**

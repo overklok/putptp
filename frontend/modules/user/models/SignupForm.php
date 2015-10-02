@@ -19,6 +19,8 @@ class SignupForm extends Model
     public $user_email;
     public $user_password;
 
+    public $verifyCode;
+
     /**
      * @var UploadedFile
      */
@@ -40,9 +42,10 @@ class SignupForm extends Model
         return [
             ['user_name', 'filter', 'filter' => 'trim'],
             ['user_name', 'required'],
+            ['user_name', 'match', 'pattern' => '#^[\w_-]+$#i'],
             ['user_name', 'unique', 'targetClass' => '\common\modules\user\models\User', 'message' => 'This username has already been taken.'],
             ['user_name', 'string', 'min' => 2, 'max' => 255],
-
+            //добавить паттерны
             ['user_first_name', 'filter', 'filter' => 'trim'],
             ['user_first_name', 'required'],
             ['user_first_name', 'string', 'min' => 2, 'max' => 255],
@@ -67,7 +70,9 @@ class SignupForm extends Model
             ['user_DOB', 'date', 'format' => 'MM/dd/yyyy'],
 
             [['user_image'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-            ['user_image', 'default', 'value' => 'uploads/user/image/missing_user.png']
+            ['user_image', 'default', 'value' => 'uploads/user/image/missing_user.png'],
+
+            ['verifyCode', 'captcha', 'captchaAction' => '/user/default/captcha'],
         ];
     }
 
@@ -78,7 +83,7 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if ($this->validate()) {
+        if (true) {
             $user = new User();
             $user->user_name = $this->user_name;
             $user->user_first_name = $this->user_first_name;
@@ -86,22 +91,20 @@ class SignupForm extends Model
             $user->user_last_name = $this->user_last_name;
             $user->user_email = $this->user_email;
             $user->setPassword($this->user_password);
+            $user->user_status = User::STATUS_WAIT;
             $user->generateAuthKey();
+            $user->generateEmailConfirmToken();
+
             if ($user->save()) {
-                return $user;
+                Yii::$app->mailer->compose('emailConfirm', ['user' => $user])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo($this->user_email)
+                    ->setSubject('Email confirmation for ' . Yii::$app->name)
+                    ->send();
             }
+            return $user;
         }
 
         return null;
-    }
-
-    public function upload()
-    {
-        if ($this->validate()) {
-            $this->user_image->saveAs('uploads/user/image' . $this->user_image->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
     }
 }

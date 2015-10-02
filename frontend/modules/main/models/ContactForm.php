@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\main\models;
+namespace app\modules\main\models;
 
 use Yii;
 use yii\base\Model;
@@ -55,5 +55,21 @@ class ContactForm extends Model
             ->setSubject($this->subject)
             ->setTextBody($this->body)
             ->send();
+    }
+
+    public function contact($email)
+    {
+        if ($this->validate()) {
+            Yii::$app->mailer->compose()
+                ->setTo($email)
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setReplyTo([$this->email => $this->name])
+                ->setSubject($this->subject)
+                ->setTextBody($this->body)
+                ->send();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

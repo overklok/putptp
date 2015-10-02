@@ -22,7 +22,7 @@ class m130524_201442_init_user extends Migration
             'user_password_hash' => $this->string()->notNull(),
             'user_password_reset_token' => $this->string()->unique(),
             'user_email' => $this->string()->notNull()->unique(),
-            'email_confirm_token' => $this->string(),
+            'user_email_confirm_token' => $this->string(),
             'user_status' => $this->smallInteger()->notNull()->defaultValue(1),
             'user_DOB' => $this->date()->notNull(),
             'created_at' => $this->integer()->notNull(),

@@ -1,10 +1,9 @@
 <?php
 namespace app\modules\main\controllers;
 
-use Yii;
-use frontend\modules\main\models\ContactForm;
+use app\modules\main\models\ContactForm;
 use yii\web\Controller;
-
+use Yii;
 
 class ContactController extends Controller
 {
@@ -26,13 +25,17 @@ class ContactController extends Controller
     public function actionIndex()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
-            }
 
+        if ($user = Yii::$app->user->identity)
+        {
+            /** @var \app\modules\user\models\User $user */
+            $model->name = $user->user_name;
+            $model->email = $user->email;
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail']))
+        {
+            Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         } else {
             return $this->render('index', [

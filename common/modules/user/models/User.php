@@ -5,7 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -30,9 +30,9 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
     //Статусы пользователя
-    const STATUS_DELETED = 0;
+    const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
-    //const STATUS_BANNED = 100;
+    const STATUS_WAIT = 2;
 
     /**
      * @inheritdoc
@@ -58,8 +58,49 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            ['user_name', 'required'],
+            ['user_name', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            ['user_name', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
+            ['user_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['user_email', 'required'],
+            ['user_email', 'email'],
+            ['user_email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],
+            ['user_email', 'string', 'max' => 255],
+
+            ['user_status', 'integer'],
             ['user_status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['user_status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['user_status', 'in', 'range' => array_keys(self::getStatusesArray())],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'created_at' => 'Create time',
+            'updated_at' => 'Update time',
+            'username' => 'User name',
+            'email' => 'Email',
+            'status' => 'Status',
+        ];
+    }
+
+
+    public function getStatusName()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    public static function getStatusesArray()
+    {
+        return [
+            self::STATUS_BLOCKED => 'Locked',
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_WAIT => 'Waiting for a confirm',
         ];
     }
 
@@ -200,7 +241,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByEmailConfirmToken($email_confirm_token)
     {
-        return static::findOne(['email_confirm_token' => $email_confirm_token, 'status' => self::STATUS_WAIT]);
+        return static::findOne(['user_email_confirm_token' => $email_confirm_token, 'user_status' => self::STATUS_WAIT]);
     }
 
      /**
@@ -208,7 +249,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generateEmailConfirmToken()
     {
-        $this->email_confirm_token = Yii::$app->security->generateRandomString();
+        $this->user_email_confirm_token = Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -216,7 +257,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function removeEmailConfirmToken()
     {
-        $this->email_confirm_token = null;
+        $this->user_email_confirm_token = null;
     }
 
 }

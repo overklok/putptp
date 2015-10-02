@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
 use yii\jui\DatePicker;
 
 $this->title = 'Signup';
@@ -32,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'user_email') ?>
 
-                <?= $form->field($model, 'user_DOB')->widget(yii\jui\DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'MM/dd/yyyy',
+                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                    'captchaAction' => '/user/default/captcha',
+                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
                 ]) ?>
 
                 <?= $form->field($model, 'user_image')->fileInput() ?>
