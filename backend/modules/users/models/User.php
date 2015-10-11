@@ -4,6 +4,7 @@ namespace app\modules\users\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use common\modules\user\models\UserSettings;
 
 class User extends \common\modules\user\models\User
 {
@@ -50,6 +51,50 @@ class User extends \common\modules\user\models\User
             }
             return true;
         }
+        return false;
+    }
+
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete())
+        {
+            $settings = UserSettings::findOne(['user_id' => $this->user_id]);
+            if ($settings && $settings->delete())
+                return true;
+        }
+        return false;
+    }
+
+    public static function changeStatus($from, $to)
+    {
+        $users = User::findAll(['user_status' => $from]);
+
+        if(!empty($users))
+        {
+            foreach ($users as $user)
+            {
+                $user->user_status = $to;
+                $user->save();
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function deleteWithStatus($status)
+    {
+        $users = User::findAll(['user_status' => $status]);
+
+        if(!empty($users))
+        {
+            foreach ($users as $user)
+            {
+                $user->delete();
+            }
+            return true;
+        }
+
         return false;
     }
 

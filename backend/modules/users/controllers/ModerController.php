@@ -113,6 +113,20 @@ class ModerController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionSetBlocked()
+    {
+        User::changeStatus(User::STATUS_WAIT, User::STATUS_BLOCKED);
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionDeleteBlocked()
+    {
+        User::deleteWithStatus(User::STATUS_BLOCKED);
+
+        return $this->redirect(['index']);
+    }
+
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -128,4 +142,5 @@ class ModerController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

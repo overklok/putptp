@@ -8,7 +8,7 @@ class m150930_182515_init_user_settings extends Migration
     public function up()
     {
         $this->createTable('user_settings', [
-            'user_id' => $this->integer()->notNull(),
+            'user_id' => $this->primaryKey(),
             'user_set_f1' => $this->boolean()->notNull(),
             'user_set_f2' => $this->boolean()->notNull(),
             'user_image_url' => $this->string()->notNull()->defaultValue(''),

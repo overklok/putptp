@@ -44,13 +44,14 @@ class BookSearch extends Book
     public function search($params)
     {
         $query = Book::find();
-
-        $query->joinWith(['author' => function ($query)
+        if ($this->user_name != '')
+        {
+            $query->joinWith(['author' => function ($query)
             {
-                if ($this->user_name)
-                    $query->where(['user.user_name' => $this->user_name]);
+                $query->where(['user.user_name' => $this->user_name]);
             }
-        ]);
+            ]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

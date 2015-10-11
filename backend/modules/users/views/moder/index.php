@@ -43,6 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Block Unconfirmed', ['set-blocked'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Clean Blocked!', ['delete-blocked'], ['class' => 'btn btn-danger']) ?>
     </p>
 
     <?= GridView::widget([
@@ -79,7 +81,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_last_name',
             //'age',
              'user_DOB',
-             'created_at:datetime',
              //'updated_at',
             /*
             [

@@ -2,6 +2,7 @@
 namespace frontend\modules\user\models;
 
 use common\modules\user\models\User;
+use common\modules\user\models\UserSettings;
 use yii\base\Model;
 use yii\web\UploadedFile;
 use Yii;
@@ -65,10 +66,10 @@ class SignupForm extends Model
 
             ['user_password', 'required'],
             ['user_password', 'string', 'min' => 6],
-
+/*
             ['user_DOB', 'required'],
             ['user_DOB', 'date', 'format' => 'MM/dd/yyyy'],
-
+*/
             [['user_image'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             ['user_image', 'default', 'value' => 'uploads/user/image/missing_user.png'],
 
@@ -83,28 +84,42 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if (true) {
-            $user = new User();
-            $user->user_name = $this->user_name;
-            $user->user_first_name = $this->user_first_name;
-            $user->user_middle_name = $this->user_middle_name;
-            $user->user_last_name = $this->user_last_name;
-            $user->user_email = $this->user_email;
-            $user->setPassword($this->user_password);
-            $user->user_status = User::STATUS_WAIT;
-            $user->generateAuthKey();
-            $user->generateEmailConfirmToken();
+        if ($user = $this->populate()) {
+            Yii::$app->mailer->compose('emailConfirm', ['user' => $user])
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setTo($this->user_email)
+                ->setSubject('Email confirmation for ' . Yii::$app->name)
+                ->send();
 
-            if ($user->save()) {
-                Yii::$app->mailer->compose('emailConfirm', ['user' => $user])
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setTo($this->user_email)
-                    ->setSubject('Email confirmation for ' . Yii::$app->name)
-                    ->send();
-            }
             return $user;
         }
 
+        //return $user;
         return null;
+}
+
+    public function populate()
+    {
+        $user = new User();
+        $user->user_name = $this->user_name;
+        $user->user_first_name = $this->user_first_name;
+        $user->user_middle_name = $this->user_middle_name;
+        $user->user_last_name = $this->user_last_name;
+        $user->user_email = $this->user_email;
+        $user->setPassword($this->user_password);
+        $user->user_status = User::STATUS_WAIT;
+        $user->generateAuthKey();
+        $user->generateEmailConfirmToken();
+
+        if ($user->save()) {
+            $settings = new UserSettings();
+            $settings->user_id = $user->user_id;
+            $settings->user_image_url = $this->user_image;
+
+            if ($settings->save())
+                return $user;
+        }
+
+        return false;
     }
 }

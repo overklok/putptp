@@ -49,12 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ]) ?>
 
+    <h1><?= Html::encode($model->user_name . '\'s Books:') ?></h1>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'book_title',

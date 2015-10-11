@@ -12,7 +12,7 @@ class UserDetail
         return [
             [
                 'group' => true,
-                'label' => 'Identification Information',
+                'label' => 'Identification Info',
                 'rowOptions' => ['class' => 'info']
             ],
             'user_id',
@@ -28,7 +28,7 @@ class UserDetail
             'user_DOB:datetime',
             [
                 'group' => true,
-                'label' => 'Moderation Information',
+                'label' => 'Moderation Info',
                 'rowOptions' => ['class' => 'info']
             ],
             [
@@ -40,7 +40,7 @@ class UserDetail
             ],
             [
                 'group' => true,
-                'label' => 'DB Information',
+                'label' => 'DB Info',
                 'rowOptions' => ['class' => 'info']
             ],
             'created_at:datetime',
