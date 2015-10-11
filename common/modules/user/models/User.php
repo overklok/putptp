@@ -80,19 +80,19 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'user_id' => 'ID',
             'created_at' => 'Create time',
             'updated_at' => 'Update time',
-            'username' => 'User name',
-            'email' => 'Email',
-            'status' => 'Status',
+            'user_name' => 'User name',
+            'user_email' => 'Email',
+            'user_status' => 'Status',
         ];
     }
 
 
     public function getStatusName()
     {
-        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->user_status);
     }
 
     public static function getStatusesArray()

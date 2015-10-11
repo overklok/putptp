@@ -12,7 +12,18 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-
+        'main' => [
+            'class' => 'app\modules\main\Module',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
+        ],
+        'users' => [
+            'class' => 'app\modules\users\Module',
+        ],
+        'books' => [
+            'class' => 'app\modules\books\Module'
+        ]
     ],
     'components' => [
         'user' => [

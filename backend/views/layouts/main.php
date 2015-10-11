@@ -37,19 +37,46 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/main/default/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/default/login']];
-    } else {
-        $menuItems[] = [
+        Yii::$app->user->isGuest ?
+            ['label' => 'Login', 'url' => ['/user/default/login']] :
+            false,
+        !Yii::$app->user->isGuest ?
+            ['label' => 'Moderation',
+                'items' => [
+                    [
+                        'label' => 'Users Control',
+                        'url' => ['/users/moder/index'],
+                    ],
+                    [
+                        'label' => 'Books Control',
+                        'url' => ['/books/moder/index'],
+                    ],
+                ]
+            ] :
+        false,
+        !Yii::$app->user->isGuest ?
+            ['label' => 'Administration',
+                'items' => [
+                    [
+                        'label' => 'Users Management',
+                        'url' => ['/users/admin/index'],
+                    ],
+                ]
+            ] :
+        false,
+        !Yii::$app->user->isGuest ?
+        [
             'label' => 'Logout (' . Yii::$app->user->identity->user_name . ')',
             'url' => ['/user/default/logout'],
             'linkOptions' => ['data-method' => 'post']
-        ];
-    }
+        ] :
+        false,
+    ];
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
+        'activateParents' => true,
+        'items' => array_filter($menuItems),
     ]);
     NavBar::end();
     ?>

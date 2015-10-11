@@ -19,10 +19,10 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-         ],
-        'errorHandler' => [
-            'errorAction' => 'main/default/error',
         ],
+    ],
+    'modules' => [
+
     ],
     'params' => $params,
 ];
