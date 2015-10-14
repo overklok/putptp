@@ -103,6 +103,7 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+
                     Yii::$app->getSession()->setFlash('success', 'Confirm your email address.');
                     return $this->goHome();
             }

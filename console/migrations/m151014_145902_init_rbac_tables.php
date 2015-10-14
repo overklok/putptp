@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m151006_193320_init_rbac_tables extends Migration
+class m151014_145902_init_rbac_tables extends Migration
 {
     public function up()
     {

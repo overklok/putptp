@@ -5,6 +5,7 @@ namespace app\modules\books\controllers;
 use Yii;
 use app\modules\books\models\Book;
 use app\modules\books\models\BookSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,6 +18,25 @@ class ModerController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['login', 'error'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['moder'],
+                        'actions' => ['index', 'view', 'update']
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -48,8 +68,6 @@ class ModerController extends Controller
      */
     public function actionView($id)
     {
-
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

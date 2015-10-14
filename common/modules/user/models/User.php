@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\rbac\Role;
 use yii\web\IdentityInterface;
 
 /**
@@ -29,6 +30,10 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    //Роли
+    const ROLE_USER = 1;
+    const ROLE_MODER = 5;
+    const ROLE_ADMIN = 3;
     //Статусы пользователя
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;

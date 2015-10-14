@@ -22,13 +22,14 @@ return [
             'class' => 'app\modules\users\Module',
         ],
         'books' => [
-            'class' => 'app\modules\books\Module'
+            'class' => 'app\modules\books\Module',
         ]
     ],
     'components' => [
         'user' => [
             'identityClass' => 'common\modules\user\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => '/backend/web/login',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

@@ -1,7 +1,15 @@
 html,
 body {
     height: 100%;
+    font-family: Consolas, monospace;
 }
+
+.navbar {
+    background-color: darkred;
+    color: #000000;
+}
+
+
 
 .wrap {
     min-height: 100%;

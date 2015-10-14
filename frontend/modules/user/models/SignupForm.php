@@ -31,7 +31,7 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'user_DOB' => 'Date of Birth:',
+        //    'user_DOB' => 'Date of Birth:',
             'user_image' => 'Your Profile Photo:',
         ];
     }
@@ -100,26 +100,35 @@ class SignupForm extends Model
 
     public function populate()
     {
-        $user = new User();
-        $user->user_name = $this->user_name;
-        $user->user_first_name = $this->user_first_name;
-        $user->user_middle_name = $this->user_middle_name;
-        $user->user_last_name = $this->user_last_name;
-        $user->user_email = $this->user_email;
-        $user->setPassword($this->user_password);
-        $user->user_status = User::STATUS_WAIT;
-        $user->generateAuthKey();
-        $user->generateEmailConfirmToken();
+        if ($this->validate())
+        {
+            $user = new User();
+            $user->user_name = $this->user_name;
+            $user->user_first_name = $this->user_first_name;
+            $user->user_middle_name = $this->user_middle_name;
+            $user->user_last_name = $this->user_last_name;
+            $user->user_email = $this->user_email;
+            $user->setPassword($this->user_password);
+            $user->user_status = User::STATUS_WAIT;
+            $user->generateAuthKey();
+            $user->generateEmailConfirmToken();
 
-        if ($user->save()) {
-            $settings = new UserSettings();
-            $settings->user_id = $user->user_id;
-            $settings->user_image_url = $this->user_image;
+            if ($user->save()) {
+                $settings = new UserSettings();
+                $settings->user_id = $user->user_id;
+                $settings->user_image_url = $this->user_image;
 
-            if ($settings->save())
-                return $user;
+                if ($settings->save())
+                {
+                    //Присвоение роли
+                    $auth = Yii::$app->authManager;
+                    $userRole = $auth->getRole('user');
+                    $auth->assign($userRole, $user->getId());
+
+                    return $user;
+                }
+            }
         }
-
         return false;
     }
 }

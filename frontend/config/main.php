@@ -26,6 +26,7 @@ return [
         'user' => [
             'identityClass' => 'common\modules\user\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => 'main\login',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

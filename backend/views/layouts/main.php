@@ -40,7 +40,7 @@ AppAsset::register($this);
         Yii::$app->user->isGuest ?
             ['label' => 'Login', 'url' => ['/user/default/login']] :
             false,
-        !Yii::$app->user->isGuest ?
+        (Yii::$app->user->can('moder') && !Yii::$app->user->can('admin'))?
             ['label' => 'Moderation',
                 'items' => [
                     [
@@ -51,19 +51,35 @@ AppAsset::register($this);
                         'label' => 'Books Control',
                         'url' => ['/books/moder/index'],
                     ],
+                    [
+                        'label' => 'Role System Management',
+                        'url' => ['/rbac/moder/index']
+                    ]
                 ]
             ] :
         false,
-        !Yii::$app->user->isGuest ?
+        Yii::$app->user->can('admin') ?
             ['label' => 'Administration',
                 'items' => [
                     [
-                        'label' => 'Users Management',
-                        'url' => ['/users/admin/index'],
+                        'label' => 'Users Control',
+                        'url' => ['/users/moder/index'],
                     ],
+                    [
+                        'label' => 'Books Control',
+                        'url' => ['/books/moder/index'],
+                    ],
+                    [
+                        'label' => 'Role System Management',
+                        'url' => ['/rbac/moder/index']
+                    ]
                 ]
             ] :
         false,
+
+        !Yii::$app->user->isGuest ?
+            ['label' => 'CMS Settings'] : false,
+
         !Yii::$app->user->isGuest ?
         [
             'label' => 'Logout (' . Yii::$app->user->identity->user_name . ')',

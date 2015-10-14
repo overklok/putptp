@@ -9,23 +9,25 @@ $this->title = 'My Yii Application';
 <div class="main-default-index">
 
     <div class="jumbotron">
-        <h1>Приветствуем!</h1>
-
-        <p class="lead">Вы на главной странице Put Pen To Paper CMS.<br /> Выберите модуль управления:</p>
+        <h1>This is <i>pptp</i> Control Panel.</h1>
+        <p class="lead">Here is a little bit of features:</p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-6">
-                <h2>Users Moderation Features</h2>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6 text-center">
+                <h2>Users Moderation</h2>
                 <p><a class="btn btn-default" href="<?= Url::toRoute('/users/moder'); ?>">Users &raquo;</a></p>
             </div>
-            <div class="col-lg-6">
-                <h2>Book Moderation Features</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6 text-center">
+                <h2>Book Moderation</h2>
                 <p><a class="btn btn-default" href="<?= Url::toRoute('/books/moder'); ?>">Books &raquo;</a></p>
             </div>
-
         </div>
     </div>
 </div>
