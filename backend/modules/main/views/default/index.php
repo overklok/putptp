@@ -26,7 +26,7 @@ $this->title = 'My Yii Application';
             <div class="col-lg-3"></div>
             <div class="col-lg-6 text-center">
                 <h2>Book Moderation</h2>
-                <p><a class="btn btn-default" href="<?= Url::toRoute('/books/moder'); ?>">Books &raquo;</a></p>
+                <p><a class="btn btn-default" href="<?= Url::toRoute('/book/moder'); ?>">Books &raquo;</a></p>
             </div>
         </div>
     </div>

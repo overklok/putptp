@@ -1,16 +1,13 @@
 <?php
 
-namespace app\modules\books\models;
+namespace frontend\modules\user\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use app\modules\users\models\User;
+use common\modules\user\models\UserSettings;
 
-class Book extends \common\modules\book\models\Book
+class User extends \common\modules\user\models\User
 {
-    const SCENARIO_ADMIN_CREATE = 'adminCreate';
-    const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
-
     /**
      * @inheritdoc
      */
@@ -30,10 +27,16 @@ class Book extends \common\modules\book\models\Book
         return ArrayHelper::merge(parent::attributeLabels(), []);
     }
 
-    public function getAuthorNameById($id)
+    public function beforeSave($insert)
     {
-        $user = User::findOne($id);
-        return $user->user_name;
+        if (parent::beforeSave($insert))
+            return true;
+        return false;
     }
 
+    public function getSettings()
+    {
+        $settings = UserSettings::findOne($this->id);
+        return $settings;
+    }
 }

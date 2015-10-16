@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\modules\user\models\SignupForm */
+/* @var $model \frontend\modules\svc\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -33,10 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'user_email') ?>
 
-                <?= $form->field($model, 'user_image')->fileInput() ?>
+                <?//= $form->field($model, 'user_image')->fileInput() ?>
 
                 <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'captchaAction' => '/user/default/captcha',
+                    'captchaAction' => '/svc/default/captcha',
                     'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
                 ]) ?>
 

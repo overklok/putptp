@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= Html::img('/uploads/user/image/1.jpg', ['alt'=>'some', 'class'=>'img-thumbnail col-md-2 hidden-xs hidden-sm']);?>
+    <?= Html::img('/' . $model->settings->user_image_url, ['alt'=>'some', 'class'=>'img-circle col-md-2 hidden-xs hidden-sm']);?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'book_title',
-                'module' => 'books',
+                'module' => 'book',
             ],
 
             // 'book_description',

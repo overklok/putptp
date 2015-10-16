@@ -2,17 +2,22 @@
 
 namespace app\modules\books\models;
 
+use common\modules\user\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\modules\books\models\Book;
+use yii\helpers\VarDumper;
 
 /**
- * BookSearch represents the model behind the search form about `app\modules\books\models\Book`.
+ * BookSearch represents the model behind the search form about `app\modules\book\models\Book`.
  */
 class BookSearch extends Book
 {
     public $user_name;
+
+    public $user_id;
+
     /**
      * @inheritdoc
      */
@@ -44,13 +49,14 @@ class BookSearch extends Book
     public function search($params)
     {
         $query = Book::find();
-        if ($this->user_name != '')
-        {
-            $query->joinWith(['author' => function ($query)
-            {
-                $query->where(['user.user_name' => $this->user_name]);
-            }
-            ]);
+        if ($this->user_name != '') {
+            $query->joinWith(['author']);
+            $query->where(['user.user_name' => $this->user_name]);
+        }
+
+        else if ($params['author_id']){
+            $query->joinWith(['author']);
+            $query->where(['user.user_id' => $params['author_id']]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -78,5 +84,10 @@ class BookSearch extends Book
 
 
         return $dataProvider;
+    }
+
+    public function getUser_name()
+    {
+        return Book::getAuthorNameById($this->user_id);
     }
 }

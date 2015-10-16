@@ -15,8 +15,11 @@ return [
         'main' => [
             'class' => 'app\modules\main\Module',
         ],
+        'svc' => [
+            'class' => 'app\modules\svc\Module',
+        ],
         'user' => [
-            'class' => 'app\modules\user\Module',
+                'class' => 'app\modules\user\Module',
         ],
         'help' => [
             'class' => 'app\modules\help\Module',

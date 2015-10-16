@@ -1,6 +1,6 @@
 <?php
 
-namespace common\modules\books\models;
+namespace common\modules\book\models;
 
 use Yii;
 
@@ -11,7 +11,7 @@ use Yii;
  * @property string $genre_name
  * @property string $genre_title
  *
- * @property Book[] $books
+ * @property Book[] $book
  */
 class Genre extends \yii\db\ActiveRecord
 {

@@ -71,7 +71,7 @@ class ModerController extends Controller
     public function actionView($id)
     {
         $searchModel = new BookSearch();
-        Yii::$app->request->setQueryParams(ArrayHelper::merge(Yii::$app->request->getQueryParams(), ['id' => $id]));
+        Yii::$app->request->setQueryParams(ArrayHelper::merge(Yii::$app->request->getQueryParams(), ['author_id' => $id]));
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),

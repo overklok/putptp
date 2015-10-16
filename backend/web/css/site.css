@@ -1,7 +1,8 @@
 html,
 body {
     height: 100%;
-    font-family: Consolas, monospace;
+    font-family: 'Open Sans', sans-serif;
+    /*font-family: Consolas, monospace;*/
 }
 
 .navbar {

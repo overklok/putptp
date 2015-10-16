@@ -21,7 +21,7 @@ return [
         'users' => [
             'class' => 'app\modules\users\Module',
         ],
-        'books' => [
+        'book' => [
             'class' => 'app\modules\books\Module',
         ]
     ],

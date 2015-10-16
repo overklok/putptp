@@ -1,5 +1,5 @@
 <?php
-namespace frontend\modules\user\models;
+namespace frontend\modules\svc\models;
 
 use yii\base\InvalidParamException;
 use yii\base\Model;

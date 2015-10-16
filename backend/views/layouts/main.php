@@ -36,53 +36,53 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/main/default/index']],
+        ['label' => 'HOME', 'url' => ['/main/default/index']],
         Yii::$app->user->isGuest ?
-            ['label' => 'Login', 'url' => ['/user/default/login']] :
+            ['label' => 'LOGIN', 'url' => ['/user/default/login']] :
             false,
         (Yii::$app->user->can('moder') && !Yii::$app->user->can('admin'))?
-            ['label' => 'Moderation',
+            ['label' => 'MODERATION',
                 'items' => [
                     [
-                        'label' => 'Users Control',
+                        'label' => 'USERS CONTROL',
                         'url' => ['/users/moder/index'],
                     ],
                     [
-                        'label' => 'Books Control',
-                        'url' => ['/books/moder/index'],
+                        'label' => 'BOOKS CONTROL',
+                        'url' => ['/book/moder/index'],
                     ],
-                    [
-                        'label' => 'Role System Management',
-                        'url' => ['/rbac/moder/index']
-                    ]
                 ]
             ] :
         false,
         Yii::$app->user->can('admin') ?
-            ['label' => 'Administration',
+            ['label' => 'ADMINISTRATION',
                 'items' => [
                     [
-                        'label' => 'Users Control',
+                        'label' => 'USERS CONTROL',
                         'url' => ['/users/moder/index'],
                     ],
                     [
-                        'label' => 'Books Control',
-                        'url' => ['/books/moder/index'],
+                        'label' => 'BOOKS CONTROL',
+                        'url' => ['/book/moder/index'],
                     ],
                     [
-                        'label' => 'Role System Management',
+                        'label' => 'ACCESS RIGHTS MANAGEMENT',
                         'url' => ['/rbac/moder/index']
+                    ],
+                    [
+                        'label' => 'USER PROFILING MANAGEMENT',
+                        'url' => ['/profiling/moder/index']
                     ]
                 ]
             ] :
         false,
 
         !Yii::$app->user->isGuest ?
-            ['label' => 'CMS Settings'] : false,
+            ['label' => 'CMS SETTINGS'] : false,
 
         !Yii::$app->user->isGuest ?
         [
-            'label' => 'Logout (' . Yii::$app->user->identity->user_name . ')',
+            'label' => 'LOGOUT (' . Yii::$app->user->identity->user_name . ')',
             'url' => ['/user/default/logout'],
             'linkOptions' => ['data-method' => 'post']
         ] :

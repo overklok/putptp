@@ -30,7 +30,7 @@ class UserSearch extends Model
     {
         return [
             [['user_id', 'user_status'], 'integer'],
-            [['user_name', 'user_email'], 'safe'],
+            [['user_name', 'user_first_name'], 'string'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
 
         ];
@@ -80,10 +80,10 @@ class UserSearch extends Model
         ]);
         $query
             ->andFilterWhere(['like', 'user_name', $this->user_name])
-            ->andFilterWhere(['like', 'user_email', $this->user_email])
-            ->andFilterWhere(['like', 'user_first_name', $this->user_name])
-            ->andFilterWhere(['like', 'user_middle_name', $this->user_middle_name])
-        	->andFilterWhere(['like', 'user_last_name', $this->user_last_name])
+            //->andFilterWhere(['like', 'user_email', $this->user_email])
+            ->andFilterWhere(['like', 'user_first_name', $this->user_first_name])
+            //->andFilterWhere(['like', 'user_middle_name', $this->user_middle_name])
+        	//->andFilterWhere(['like', 'user_last_name', $this->user_last_name])
             //->andFilterWhere(['>=', 'user_DOB', $this->age])
             ->andFilterWhere(['not like', 'user_status', $this->user_status])
             ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])

@@ -1,5 +1,5 @@
 <?php
-namespace frontend\modules\user\models;
+namespace frontend\modules\svc\models;
 
 use common\modules\user\models\User;
 use common\modules\user\models\UserSettings;
@@ -71,10 +71,20 @@ class SignupForm extends Model
             ['user_DOB', 'date', 'format' => 'MM/dd/yyyy'],
 */
             [['user_image'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-            ['user_image', 'default', 'value' => 'uploads/user/image/missing_user.png'],
+            ['user_image', 'default', 'value' => 'upload/user/image/missing_user.png'],
 
-            ['verifyCode', 'captcha', 'captchaAction' => '/user/default/captcha'],
+            ['verifyCode', 'captcha', 'captchaAction' => '/svc/default/captcha'],
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->user_image->saveAs('/uploads/' . $this->user_image->baseName . '.' . $this->user_image->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -116,7 +126,7 @@ class SignupForm extends Model
             if ($user->save()) {
                 $settings = new UserSettings();
                 $settings->user_id = $user->user_id;
-                $settings->user_image_url = $this->user_image;
+                //$settings->user_image_url = $this->user_image;
 
                 if ($settings->save())
                 {

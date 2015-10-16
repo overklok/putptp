@@ -171,6 +171,12 @@ class User extends ActiveRecord implements IdentityInterface
         return $timestamp + $expire >= time();
     }
 
+    public function getSettings()
+    {
+        $settings = UserSettings::findOne($this->user_id);
+        return $settings;
+    }
+
     /**
      * @inheritdoc
      */

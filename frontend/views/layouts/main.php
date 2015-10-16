@@ -28,29 +28,47 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
+
         'brandLabel' => 'Put Pen To Paper',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
+            'id' => 'navbar-main',
         ],
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/main/default/index']],
-        ['label' => 'About', 'url' => ['/help/default/index']],
-        ['label' => 'Contact', 'url' => ['/main/contact/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/default/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/default/login']];
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/svc/default/signup']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/svc/default/login']];
     } else {
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->user_name . ')',
-            'url' => ['/user/default/logout'],
-            'linkOptions' => ['data-method' => 'post']
+            'label' => Yii::$app->user->identity->user_first_name . ' ' . Yii::$app->user->identity->user_last_name,
+            'items' => [
+                    [
+                        'label' => 'Dashboard',
+                        'url' => '/user/dashboard/index',
+                    ],
+                    [
+                        'label' => 'Logout',
+                        'url' => ['/svc/default/logout'],
+                        'linkOptions' => ['data-method' => 'post']
+                    ],
+            ],
+        ];
+        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-envelope"></span>', 'url' => '#'];
+        $menuItems[] = [
+            'label' => 'Help',
+            'items' => [
+                    ['label' => 'About','url' => ['/help/default/index']],
+                    ['label' => 'Contact', 'url' => ['/main/contact/index']],
+            ]
         ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items' => array_filter($menuItems),
     ]);
     NavBar::end();
@@ -61,12 +79,15 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="col-sm-10 col-sm-offset-1">
+            <?= $content ?>
+        </div>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
+
         <p class="pull-left">&copy; Put Pen To Paper <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>

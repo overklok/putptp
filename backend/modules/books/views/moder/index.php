@@ -25,11 +25,11 @@ Nav::widget(
         'items' => [
             [
                 'label' => 'Main Information',
-                'url' => ['/books/moder/index'],
+                'url' => ['/book/moder/index'],
             ],
             [
                 'label' => 'Settings',
-                'url' => ['/books/moder/settings'],
+                'url' => ['/book/moder/settings'],
             ],
         ],
 
@@ -55,18 +55,18 @@ Nav::widget(
             [
                 'class' => LinkColumn::className(),
                 'attribute' => 'book_title',
-                'module' => 'books',
+                'module' => 'book',
             ],
             'book_id',
             [
-                //'class' => UserNameColumn::className(),
+                'class' => UserNameColumn::className(),
                 'attribute' => 'user_name',
-                'value' => function ($model, $key, $index, $column) {
-                    /** @var User $model */
-                    /** @var \yii\grid\DataColumn $column */
-
-                    return '';
-                }
+                //'value' => function ($model, $key, $index, $column) {
+                //    /** @var User $model */
+                //    /** @var \yii\grid\DataColumn $column */
+                //
+                //return '';
+                //}
             ],
             [
                 'filter' => Book::getBookTypesArray(),

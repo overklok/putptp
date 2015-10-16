@@ -1,6 +1,6 @@
 <?php
 
-namespace common\modules\books\models;
+namespace common\modules\book\models;
 
 use Yii;
 
@@ -11,7 +11,7 @@ use Yii;
  * @property string $book_type_name
  * @property string $book_type_title
  *
- * @property Book[] $books
+ * @property Book[] $book
  */
 class BookType extends \yii\db\ActiveRecord
 {

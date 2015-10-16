@@ -28,9 +28,9 @@ class ContactController extends Controller
 
         if ($user = Yii::$app->user->identity)
         {
-            /** @var \app\modules\user\models\User $user */
+            /** @var \frontend\modules\user\models\User $user */
             $model->name = $user->user_name;
-            $model->email = $user->email;
+            $model->email = $user->user_email;
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail']))

@@ -1,7 +1,8 @@
 html,
 body {
     height: 100%;
-    font-family: Georgia;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #efedf0;
 }
 
 .wrap {
@@ -9,6 +10,12 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
+}
+
+.user-pic-name {
+    border-style: solid;
+    border-width: thin;
+    background-color: #ffffff;
 }
 
 .wrap > .container {
