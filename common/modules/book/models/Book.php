@@ -70,10 +70,6 @@ class Book extends \yii\db\ActiveRecord
             ['book_type_id', 'in', 'range' => array_keys(self::getBookTypesArray())],
 
             [['book_title', 'book_description', 'book_images_url'], 'string', 'max' => 255],
-            [['book_title'], 'unique'],
-
-            ['book_title', 'required'],
-            /*['book_title', 'match', 'pattern' => '#^[\w_-]+$#i'],*/
             ['book_title', 'unique', 'targetClass' => self::className(), 'message' => 'This title has already been taken.'],
             ['book_title', 'string', 'min' => 2, 'max' => 255],
 

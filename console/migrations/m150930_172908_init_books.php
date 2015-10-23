@@ -24,7 +24,7 @@ class m150930_172908_init_books extends Migration
             'author_id' => $this->integer()->notNull(),
             'book_type_id' => $this->integer()->notNull(),
             'genre_id' => $this->integer()->notNull(),
-            'book_title' => $this->string()->notNull()->unique(),
+            'book_title' => $this->string()->unique(),
             'book_description' => $this->string(),
             'book_status' => $this->smallInteger()->notNull()->defaultValue(1),
             'book_images_url' => $this->string()->notNull()->defaultValue(''),

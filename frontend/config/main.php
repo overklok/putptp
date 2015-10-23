@@ -19,7 +19,10 @@ return [
             'class' => 'app\modules\svc\Module',
         ],
         'user' => [
-                'class' => 'app\modules\user\Module',
+            'class' => 'app\modules\user\Module',
+        ],
+        'book' => [
+            'class' => 'app\modules\book\Module',
         ],
         'help' => [
             'class' => 'app\modules\help\Module',

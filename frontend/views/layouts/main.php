@@ -38,7 +38,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Start reading', 'url' => ['/main/default/index']],
-        ['label' => 'Start writing', 'url' => ['/main/default/index']],
+        ['label' => 'Start writing', 'url' => ['/book/create']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/svc/default/signup']];

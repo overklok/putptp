@@ -48,6 +48,19 @@ class BookType extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getTypeList()
+    {
+        $ar_list = BookType::find()->all();
+        $list;
+
+        foreach ($ar_list as $elem)
+        {
+            $list[$elem->book_type_id] = $elem->book_type_title;
+        }
+
+        return $list;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

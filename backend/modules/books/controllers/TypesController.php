@@ -1,39 +1,22 @@
 <?php
+
 namespace app\modules\books\controllers;
+
 use Yii;
-use app\modules\books\models\Book;
-use app\modules\books\models\BookSearch;
-use yii\filters\AccessControl;
+use common\modules\book\models\BookType;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 /**
- * DefaultController implements the CRUD actions for Book model.
+ * TypesController implements the CRUD actions for BookType model.
  */
-class ModerController extends Controller
+class TypesController extends Controller
 {
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['login', 'error'],
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['moder'],
-                        'actions' => ['index', 'view', 'update']
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -42,21 +25,24 @@ class ModerController extends Controller
             ],
         ];
     }
+
     /**
-     * Lists all Book models.
+     * Lists all BookType models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BookSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => BookType::find(),
+        ]);
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
     /**
-     * Displays a single Book model.
+     * Displays a single BookType model.
      * @param integer $id
      * @return mixed
      */
@@ -66,24 +52,27 @@ class ModerController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
     /**
-     * Creates a new Book model.
+     * Creates a new BookType model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Book();
+        $model = new BookType();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->book_id]);
+            return $this->redirect(['view', 'id' => $model->book_type_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
+
     /**
-     * Updates an existing Book model.
+     * Updates an existing BookType model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,16 +80,18 @@ class ModerController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->book_id]);
+            return $this->redirect(['view', 'id' => $model->book_type_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
     /**
-     * Deletes an existing Book model.
+     * Deletes an existing BookType model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,18 +99,20 @@ class ModerController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
+
     /**
-     * Finds the Book model based on its primary key value.
+     * Finds the BookType model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Book the loaded model
+     * @return BookType the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Book::findOne($id)) !== null) {
+        if (($model = BookType::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

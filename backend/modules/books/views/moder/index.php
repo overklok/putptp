@@ -28,8 +28,16 @@ Nav::widget(
                 'url' => ['/book/moder/index'],
             ],
             [
+                'label' => 'Book Types',
+                'url' => ['/book/types/index'],
+            ],
+            [
+                'label' => 'Book Genres',
+                'url' => ['/book/genres/index'],
+            ],
+            [
                 'label' => 'Settings',
-                'url' => ['/book/moder/settings'],
+                'url' => ['/book/admin/settings'],
             ],
         ],
 
@@ -56,6 +64,11 @@ Nav::widget(
                 'class' => LinkColumn::className(),
                 'attribute' => 'book_title',
                 'module' => 'book',
+                'value' => function($model, $key, $index, $column) {
+                    $value = $model->{$column->attribute};
+
+                    return $value === null ? 'No Name' : $value;
+                }
             ],
             'book_id',
             [

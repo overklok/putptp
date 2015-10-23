@@ -48,6 +48,19 @@ class Genre extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getGenreList()
+    {
+        $ar_list = Genre::find()->all();
+        $list;
+
+        foreach ($ar_list as $elem)
+        {
+            $list[$elem->genre_id] = $elem->genre_title;
+        }
+
+        return $list;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
