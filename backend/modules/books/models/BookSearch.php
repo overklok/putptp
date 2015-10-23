@@ -25,7 +25,7 @@ class BookSearch extends Book
     {
         return [
             [['book_id', 'author_id', 'book_type_id', 'genre_id', 'book_status', 'created_at', 'updated_at'], 'integer'],
-            [['user_name', 'book_title', 'book_description', 'book_images_url'], 'safe'],
+            [['user_name', 'book_title'], 'safe'],
             ['user_name', 'string'],
         ];
     }

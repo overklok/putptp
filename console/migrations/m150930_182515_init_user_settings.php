@@ -9,9 +9,14 @@ class m150930_182515_init_user_settings extends Migration
     {
         $this->createTable('user_settings', [
             'user_id' => $this->primaryKey(),
-            'user_set_f1' => $this->boolean()->notNull(),
-            'user_set_f2' => $this->boolean()->notNull(),
-            'user_image_url' => $this->string()->notNull()->defaultValue(''),
+
+            'user_first_name' => $this->string()->notNull(),
+            'user_middle_name' => $this->string()->notNull(),
+            'user_last_name' => $this->string()->notNull(),
+
+            'user_res_f1' => $this->boolean()->notNull(),
+            'user_res_f2' => $this->boolean()->notNull(),
+            'user_image_url' => $this->string()->notNull()->defaultValue('missing_user.png'),
 
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),

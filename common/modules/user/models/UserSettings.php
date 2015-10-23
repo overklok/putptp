@@ -33,8 +33,14 @@ class UserSettings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
-            [['user_id', 'created_at', 'updated_at'], 'integer'],
+            [['created_at', 'updated_at'], 'integer'],
+
+            ['user_first_name', 'string', 'max' => 50],
+
+            ['user_middle_name', 'string', 'max' => 50],
+
+            ['user_last_name', 'string', 'max' => 50],
+
             [['user_image_url'], 'string', 'max' => 255]
         ];
     }
@@ -45,7 +51,7 @@ class UserSettings extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User ID',
+            'user_set_id' => 'User ID',
             'user_set_f1' => 'User Set F1',
             'user_set_f2' => 'User Set F2',
             'user_image_url' => 'User Image Url',

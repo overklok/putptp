@@ -76,9 +76,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'user_status',
                 'class' => 'app\components\grid\StatusColumn',
             ],
-            'user_first_name',
+            [
+                'attribute' => 'user_first_name',
+                'label' => 'First name',
+            ],
             //'user_middle_name',
-            'user_last_name',
+            [
+                'attribute' => 'user_last_name',
+                'label' => 'Last name',
+            ],
             //'age',
              'user_DOB',
              //'updated_at',

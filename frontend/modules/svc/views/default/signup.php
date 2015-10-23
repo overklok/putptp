@@ -7,7 +7,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
-use yii\jui\DatePicker;
+//use kartik\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,15 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'user_name') ?>
 
-                <?= $form->field($model, 'user_first_name') ?>
-
-                <?= $form->field($model, 'user_middle_name') ?>
-
-                <?= $form->field($model, 'user_last_name') ?>
-
                 <?= $form->field($model, 'user_password')->passwordInput() ?>
 
                 <?= $form->field($model, 'user_email') ?>
+
+                <?= $form->field($model, 'user_DOB')->widget(DatePicker::classname(), [
+                                                                            'options' => ['placeholder' => 'Enter birth date ...'],
+                                                                            'pluginOptions' => [
+                                                                                            'autoclose'=> true,
+                                                                                            'format' => 'yyyy-mm-dd'
+            ]
+            ]); ?>
 
                 <?//= $form->field($model, 'user_image')->fileInput() ?>
 

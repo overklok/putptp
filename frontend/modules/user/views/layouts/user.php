@@ -23,7 +23,7 @@ use yii\bootstrap\NavBar;
                 ['label' => 'Inbox', 'url' => ['/user/inbox/index']],
                 ['label' => 'Your books', 'url' => ['/user/books/index']],
                 ['label' => 'Read', 'url' => ['#']],
-                ['label' => 'Profile', 'url' => ['#']],
+                ['label' => 'Profile', 'url' => ['/user/profile/edit']],
                 ['label' => 'Account', 'url' => ['#']],
             ];
             echo Nav::widget([
@@ -34,5 +34,5 @@ use yii\bootstrap\NavBar;
         ?>
     </div>
     <?= $content ?>
-
+    </div>
 <?php $this->endContent(); ?>

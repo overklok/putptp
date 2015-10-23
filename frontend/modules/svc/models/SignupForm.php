@@ -31,8 +31,8 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-        //    'user_DOB' => 'Date of Birth:',
-            'user_image' => 'Your Profile Photo:',
+            'user_DOB' => 'Date of Birth:',
+        //    'user_image' => 'Your Profile Photo:',
         ];
     }
     /**
@@ -47,7 +47,7 @@ class SignupForm extends Model
             ['user_name', 'unique', 'targetClass' => '\common\modules\user\models\User', 'message' => 'This username has already been taken.'],
             ['user_name', 'string', 'min' => 2, 'max' => 255],
             //добавить паттерны
-            ['user_first_name', 'filter', 'filter' => 'trim'],
+    /*        ['user_first_name', 'filter', 'filter' => 'trim'],
             ['user_first_name', 'required'],
             ['user_first_name', 'string', 'min' => 2, 'max' => 255],
 
@@ -57,7 +57,7 @@ class SignupForm extends Model
 
             ['user_middle_name', 'filter', 'filter' => 'trim'],
             ['user_middle_name', 'string', 'min' => 2, 'max' => 255],
-
+*/
             ['user_email', 'filter', 'filter' => 'trim'],
             ['user_email', 'required'],
             ['user_email', 'email'],
@@ -66,17 +66,17 @@ class SignupForm extends Model
 
             ['user_password', 'required'],
             ['user_password', 'string', 'min' => 6],
-/*
+
             ['user_DOB', 'required'],
-            ['user_DOB', 'date', 'format' => 'MM/dd/yyyy'],
-*/
+            ['user_DOB', 'date', 'format' => 'yyy-mm-dd'],
+/*
             [['user_image'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             ['user_image', 'default', 'value' => 'upload/user/image/missing_user.png'],
-
+*/
             ['verifyCode', 'captcha', 'captchaAction' => '/svc/default/captcha'],
         ];
     }
-
+/*
     public function upload()
     {
         if ($this->validate()) {
@@ -86,7 +86,7 @@ class SignupForm extends Model
             return false;
         }
     }
-
+*/
     /**
      * Signs user up.
      *
@@ -114,10 +114,11 @@ class SignupForm extends Model
         {
             $user = new User();
             $user->user_name = $this->user_name;
-            $user->user_first_name = $this->user_first_name;
-            $user->user_middle_name = $this->user_middle_name;
-            $user->user_last_name = $this->user_last_name;
+        //    $user->user_first_name = $this->user_first_name;
+        //    $user->user_middle_name = $this->user_middle_name;
+        //    $user->user_last_name = $this->user_last_name;
             $user->user_email = $this->user_email;
+            $user->user_DOB = $this->user_DOB;
             $user->setPassword($this->user_password);
             $user->user_status = User::STATUS_WAIT;
             $user->generateAuthKey();
@@ -126,7 +127,7 @@ class SignupForm extends Model
             if ($user->save()) {
                 $settings = new UserSettings();
                 $settings->user_id = $user->user_id;
-                //$settings->user_image_url = $this->user_image;
+                $settings->user_image_url = 'saki.png';//$this->user_image;
 
                 if ($settings->save())
                 {

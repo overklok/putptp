@@ -37,14 +37,15 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/main/default/index']],
+        ['label' => 'Start reading', 'url' => ['/main/default/index']],
+        ['label' => 'Start writing', 'url' => ['/main/default/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/svc/default/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/svc/default/login']];
     } else {
         $menuItems[] = [
-            'label' => Yii::$app->user->identity->user_first_name . ' ' . Yii::$app->user->identity->user_last_name,
+            'label' => empty(Yii::$app->user->identity->settings->user_first_name) ? Yii::$app->user->identity->user_name : Yii::$app->user->identity->settings->user_first_name . ' ' . Yii::$app->user->identity->settings->user_last_name,
             'items' => [
                     [
                         'label' => 'Dashboard',
@@ -79,9 +80,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <div class="col-sm-10 col-sm-offset-1">
             <?= $content ?>
-        </div>
     </div>
 </div>
 

@@ -171,10 +171,19 @@ class User extends ActiveRecord implements IdentityInterface
         return $timestamp + $expire >= time();
     }
 
+    public function getUser_first_name()
+    {
+        return $this->settings->user_first_name;
+    }
+
+    public function getUser_last_name()
+    {
+        return $this->settings->user_last_name;
+    }
+
     public function getSettings()
     {
-        $settings = UserSettings::findOne($this->user_id);
-        return $settings;
+        return $this->hasOne(UserSettings::className(), ['user_id' => 'user_id']);
     }
 
     /**

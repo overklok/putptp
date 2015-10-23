@@ -15,8 +15,8 @@ use app\modules\books\models\Book;
 /* @var $searchModel app\modules\books\models\BookSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$title_content = empty($model->user_first_name) ? $model->user_name :
-    $model->user_last_name . ", " . $model->user_first_name . " " . $model->user_middle_name;
+$title_content = empty($model->settings->user_first_name) ? $model->user_name :
+    $model->settings->user_last_name . ", " . $model->settings->user_first_name . " " . $model->settings->user_middle_name;
 
 $this->title = 'User Info: ' . $title_content;
 
