@@ -86,7 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'DB Information',
                 'rowOptions'=>['class'=>'info']
             ],
-                'book_images_url:url',
                 'created_at:datetime',
                 'updated_at:datetime',
         ],

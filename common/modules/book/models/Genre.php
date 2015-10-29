@@ -51,7 +51,7 @@ class Genre extends \yii\db\ActiveRecord
     public static function getGenreList()
     {
         $ar_list = Genre::find()->all();
-        $list;
+        $list = array();
 
         foreach ($ar_list as $elem)
         {

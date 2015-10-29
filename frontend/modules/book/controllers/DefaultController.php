@@ -3,6 +3,7 @@
 namespace app\modules\book\controllers;
 
 use app\modules\book\models\CreateForm;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 
@@ -16,7 +17,7 @@ class DefaultController extends Controller
         {
             if ($book = $model->createBook())
             {
-                return $this->goHome();
+                return $this->redirect(Url::to('/book/edit/' . $book->book_id . '/description'));
             }
         }
 

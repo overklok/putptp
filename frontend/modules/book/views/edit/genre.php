@@ -10,15 +10,13 @@ use common\modules\book\models\BookType;
 /* @var $model common\modules\book\models\Genre */
 
 //Уже выбраны
-$model->genre_id = 1;
-$model->book_type_id = 1;
+
+!empty($model->book_type_id) ? $model->book_type_id : $model->book_type_id = 1;
+!empty($model->genre_id) ? $model->genre_id : $model->genre_id = 1;
 
 ?>
 
-<div class="book-default-index">
-    <div class="jumbotron">
-        <h1>Start Writing</h1>
-    </div>
+<div class="book-edit-genre">
 
     <?php $form = ActiveForm::begin([
         'id' => 'filter_form',
@@ -30,17 +28,17 @@ $model->book_type_id = 1;
     <div class="text-center">
         <?= $form->field($model, 'book_type_id', [
             'inline' => true,
-            ])->radioList(
-                BookType::getTypeList(),
-                [
-                    'class' => 'btn-group',
-                    'data-toggle' => 'buttons',
-                    'unselect' => null,
-                    'item' => function ($index, $label, $name, $checked, $value) {
-                        return '<label class="btn btn-default' . ($checked ? ' active' : '') . '">' .
-                        Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn']) . $label . '</label>';
-                    },
-                ]
+        ])->radioList(
+            BookType::getTypeList(),
+            [
+                'class' => 'btn-group',
+                'data-toggle' => 'buttons',
+                'unselect' => null,
+                'item' => function ($index, $label, $name, $checked, $value) {
+                    return '<label class="btn btn-default' . ($checked ? ' active' : '') . '">' .
+                    Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn']) . $label . '</label>';
+                },
+            ]
 
         );
         ?>

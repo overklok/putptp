@@ -2,7 +2,7 @@
 namespace app\modules\book\models;
 
 use common\modules\book\models\Book;
-use common\modules\book\models\Genre;
+use common\modules\book\models\BookSettings;
 use yii\base\Model;
 use Yii;
 
@@ -10,6 +10,7 @@ class CreateForm extends Model
 {
     public $genre_id;
     public $book_type_id;
+    public $book_images_cat;
 
     public function attributeLabels()
     {
@@ -19,11 +20,13 @@ class CreateForm extends Model
         ];
     }
 
+
+
     public function rules()
     {
         return [
-            [['genre_id'], 'required'],
-            [['book_type_id'], 'required']
+            [['genre_id', 'book_type_id', 'book_images_cat'], 'required'],
+            [['book_images_cat'], 'string', 'max' => 10],
         ];
     }
 
@@ -35,15 +38,28 @@ class CreateForm extends Model
         $book->book_type_id = $this->book_type_id;
         $book->book_status = Book::STATUS_WAIT;
 
-        //$arr = [1 => 'Sas', 2 => 'Asa'];
+        if ($book->save()) {
 
-        //echo print_r($arr);
-        //exit();
+            $this->book_images_cat = self::getRandomCatName();
+            mkdir('X:/OpenServer/domains/putptp/uploads/book/' . $this->book_images_cat, 0777);
 
-        if ($book->save())
-            return $book;
+            $settings = new BookSettings();
+            $settings->book_id = $book->book_id;
+            $settings->book_images_cat = $this->book_images_cat;
 
+            if($settings->save())
+                return $book;
+        }
         return false;
+    }
+
+    public static function getRandomCatName()
+    {
+        do {
+            $name = substr(md5(microtime() . rand(0, 9999)), 0, 10);
+        } while (BookSettings::findOne(['book_images_cat' => $name]));
+
+        return $name;
     }
 
 }

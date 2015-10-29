@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m151014_145902_init_rbac_tables extends Migration
+class m130600_210000_init_rbac_tables extends Migration
 {
     public function up()
     {
@@ -15,9 +15,10 @@ class m151014_145902_init_rbac_tables extends Migration
     public function down()
     {
         $this->dropTable('auth_assignment');
-        $this->dropTable('auth_item');
-        $this->dropTable('auth_rule');
         $this->dropTable('auth_item_child');
+        $this->dropTable('auth_rule');
+        $this->dropTable('auth_item');
+
     }
 
     /*

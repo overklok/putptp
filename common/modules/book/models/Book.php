@@ -17,7 +17,6 @@ use app\modules\users\models\User;
  * @property string $book_title
  * @property string $book_description
  * @property integer $book_status
- * @property string $book_images_url
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -69,7 +68,7 @@ class Book extends \yii\db\ActiveRecord
             ['book_type_id', 'integer'],
             ['book_type_id', 'in', 'range' => array_keys(self::getBookTypesArray())],
 
-            [['book_title', 'book_description', 'book_images_url'], 'string', 'max' => 255],
+            [['book_title', 'book_description'], 'string', 'max' => 255],
             ['book_title', 'unique', 'targetClass' => self::className(), 'message' => 'This title has already been taken.'],
             ['book_title', 'string', 'min' => 2, 'max' => 255],
 
@@ -132,15 +131,15 @@ class Book extends \yii\db\ActiveRecord
 
     public static function getBookTypesArray()
     {
-        $types = BookType::find()->select('book_type_id', 'book_type_title')->asArray()->all();
+        $types = BookType::find()->asArray()->all();
 
         $arr = array();
 
-        foreach ($types as $i => $type)
+        foreach ($types as $type)
         {
-            $arr[$i+1] = $type['book_type_id'];
+            $arr[$type['book_type_id']] = $type['book_type_title'];
         }
-
+        //exit();
         return $arr;
     }
 
@@ -153,13 +152,13 @@ class Book extends \yii\db\ActiveRecord
 
     public static function getGenresArray()
     {
-        $types = Genre::find()->select('genre_id', 'genre_title')->asArray()->all();
+        $genres = Genre::find()->asArray()->all();
 
         $arr = array();
 
-        foreach ($types as $i => $type)
+        foreach ($genres as $genre)
         {
-            $arr[$i+1] = $type['genre_id'];
+            $arr[$genre['genre_id']] = $genre['genre_title'];
         }
 
         return $arr;
@@ -192,7 +191,7 @@ class Book extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBookSettings()
+    public function getSettings()
     {
         return $this->hasMany(BookSettings::className(), ['book_id' => 'book_id']);
     }
