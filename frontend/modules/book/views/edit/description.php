@@ -7,7 +7,7 @@ use common\modules\book\models\BookType;
 use jlorente\remainingcharacters\RemainingCharacters;
 
 /* @var $this yii\web\View */
-/* @var $model common\modules\book\models\Genre */
+/* @var $model common\modules\book\models\Book */
 
 //Уже выбраны
 

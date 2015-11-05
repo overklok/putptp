@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'items' => [
                 [
-                'label' => 'Main Information',
-                'url' => ['/users/moder/index'],
+                    'label' => 'Main Information',
+                    'url' => ['/users/moder/index'],
                 ],
                 [
                     'label' => 'Settings',

@@ -10,7 +10,10 @@ use yii\helpers\Url;
         $model->settings->user_first_name . " " . $model->settings->user_last_name;
 
     $name = empty($model->settings->user_first_name) ? $model->user_name : $model->settings->user_first_name;
-    $user_img = '/uploads/user/image/' . $model->settings->user_image_url;
+
+    $user_image_url = $model->settings->user_image_url ? $model->settings->user_image_url : 'missing_user.png';
+
+    $user_img = '/uploads/user/image/' . $user_image_url;
 
 ?>
     <div class="dashboard-index" style="background-color: #bbbbbb">

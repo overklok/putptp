@@ -41,7 +41,10 @@ class CreateForm extends Model
         if ($book->save()) {
 
             $this->book_images_cat = self::getRandomCatName();
-            mkdir('X:/OpenServer/domains/putptp/uploads/book/' . $this->book_images_cat, 0777);
+
+            $uploaddir = Yii::$app->params['uploadRoot'] . DIRECTORY_SEPARATOR . 'book' . DIRECTORY_SEPARATOR . $this->book_images_cat;
+            if(!file_exists($uploaddir))
+                mkdir($uploaddir, 0777);
 
             $settings = new BookSettings();
             $settings->book_id = $book->book_id;

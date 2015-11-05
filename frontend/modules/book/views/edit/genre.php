@@ -7,7 +7,7 @@ use common\modules\book\models\Genre;
 use common\modules\book\models\BookType;
 
 /* @var $this yii\web\View */
-/* @var $model common\modules\book\models\Genre */
+/* @var $model common\modules\book\models\Book */
 
 //Уже выбраны
 

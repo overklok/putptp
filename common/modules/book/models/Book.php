@@ -33,6 +33,8 @@ class Book extends \yii\db\ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_WAIT = 2;
 
+    public $chapter_id;
+
     /**
      * @inheritdoc
      */
@@ -164,6 +166,30 @@ class Book extends \yii\db\ActiveRecord
         return $arr;
     }
 
+    public function setChapterId($chap)
+    {
+        $this->chapter_id = $chap;
+    }
+
+    public function getChapter()
+    {
+        return BookChapter::findOne(['book_id' => $this->book_id, 'chapter_id' => $this->chapter_id]);
+    }
+
+    public function getChapterList()
+    {
+        $arr = array();
+
+        $chaps = BookChapter::findAll(['book_id' => $this->book_id]);
+
+        foreach ($chaps as $chap)
+        {
+            $arr[$chap->chapter_id] = $chap->chapter_title;
+        }
+
+        return $arr;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -193,7 +219,7 @@ class Book extends \yii\db\ActiveRecord
      */
     public function getSettings()
     {
-        return $this->hasMany(BookSettings::className(), ['book_id' => 'book_id']);
+        return $this->hasOne(BookSettings::className(), ['book_id' => 'book_id']);
     }
 
     /**
@@ -202,5 +228,15 @@ class Book extends \yii\db\ActiveRecord
     public function getPages()
     {
         return $this->hasMany(Page::className(), ['book_id' => 'book_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function isChaptersExists()
+    {
+        return BookChapter::find()
+            ->where( ['book_id' => $this->book_id] )
+            ->exists();
     }
 }

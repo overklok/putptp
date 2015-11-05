@@ -21,7 +21,7 @@ use yii\bootstrap\NavBar;
             $menuItems = [
                 ['label' => 'Dashboard', 'url' => ['/user/dashboard/index']],
                 ['label' => 'Inbox', 'url' => ['/user/inbox/index']],
-                ['label' => 'Your books', 'url' => ['/user/books/index']],
+                ['label' => 'My books', 'url' => ['/user/books/index']],
                 ['label' => 'Read', 'url' => ['#']],
                 ['label' => 'Profile', 'url' => ['/user/profile/edit']],
                 ['label' => 'Account', 'url' => ['#']],

@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  *
  * @property integer $book_id
  * @property string $book_images_cat
+ * @property integer $book_cover
  * @property string $book_desc_problem
  * @property string $book_desc_characters
  * @property integer $book_set_f1
@@ -46,6 +47,7 @@ class BookSettings extends \yii\db\ActiveRecord
         return [
             [['book_id'],  'required'],
             [['book_id', 'book_set_f1', 'book_set_f2', 'created_at', 'updated_at'], 'integer'],
+            [['book_cover'], 'integer'],
             [['book_images_cat'], 'string', 'max' => 10],
             [['book_desc_problem'], 'string', 'max' => 35],
             [['book_desc_characters'], 'string', 'max' => 250]
@@ -60,6 +62,7 @@ class BookSettings extends \yii\db\ActiveRecord
         return [
             'book_id' => 'Book ID',
             'book_images_cat' => 'Book Images Cat',
+            'book_cover' => 'Book Cover',
             'book_desc_problem' => 'Book Desc Problem',
             'book_desc_characters' => 'Book Desc Characters',
             'book_set_f1' => 'Book Set F1',

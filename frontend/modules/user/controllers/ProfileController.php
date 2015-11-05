@@ -37,12 +37,13 @@ class ProfileController extends Controller
 
     public function actionEdit()
     {
-     //   echo is_writable('files/uploads/user/image/');
-     //   exit();
-
         $this->layout = 'user';
 
         $model = new ProfileForm();
+        $settings = UserSettings::findOne(Yii::$app->user->identity->getId());
+
+        if(!empty($settings->user_image_url))
+            $model->filename = substr($settings->user_image_url, 0 , -4);
 
         $modelPop = $this->findModel();
 

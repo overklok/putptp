@@ -9,9 +9,10 @@ class m150930_183002_init_book_settings extends Migration
     {
         $this->createTable('book_settings', [
             'book_id' => $this->integer()->notNull(),
-            'book_images_cat' => $this->string(10)->notNull()->defaultValue('default'),
+            'book_images_cat' => $this->string(10)->unique()->notNull()->defaultValue('default'),
             'book_desc_problem' => $this->string(35),
             'book_desc_characters' => $this->string(250),
+            'book_cover' => $this->integer(),
 
             'book_set_f1' => $this->boolean()->notNull(),
             'book_set_f2' => $this->boolean()->notNull(),

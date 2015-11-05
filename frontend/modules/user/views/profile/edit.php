@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Nav;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\ProfileForm */
@@ -25,7 +26,6 @@ Nav::widget(
                 'url' => ['/user/profile/reviews'],
             ],
         ],
-
     ]
 )
 ?>
@@ -36,9 +36,19 @@ Nav::widget(
 
     <?= $form->field($model, 'user_first_name') ?>
     <?= $form->field($model, 'user_last_name') ?>
+
+    <? Modal::begin([
+        'header' => '<h2>Change Profile Photo</h2>',
+
+        'toggleButton' => ['label' => 'Change Photo'],
+        'closeButton' => []
+    ]) ?>
+
     <?= $form->field($model, 'user_image')->fileInput() ?>
 
-    <div class="form-group">
+    <?Modal::end();?>
+
+    <div class="form-group" style="margin-top: 10px;">
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>

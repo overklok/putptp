@@ -52,6 +52,14 @@ AppAsset::register($this);
                         'url' => '/user/dashboard/index',
                     ],
                     [
+                        'label' => 'My books',
+                        'url' => '/user/books/index',
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'url' => '/user/profile/edit',
+                    ],
+                    [
                         'label' => 'Logout',
                         'url' => ['/svc/default/logout'],
                         'linkOptions' => ['data-method' => 'post']

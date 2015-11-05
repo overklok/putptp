@@ -1,57 +1,71 @@
 <?php
 
 /* @var $this \yii\web\View */
-/* @var $content string */
+
 
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use kartik\icons\Icon;
+
+$book_id = Yii::$app->request->get('id');
 Icon::map($this);
 ?>
 
 <?php $this->beginContent('@app/views/layouts/main.php'); ?>
-<div class="book-edit-wrap">
+
+<h1><?= empty($this->context->bookTitle) ? 'Untitled' : $this->context->bookTitle ?></h1>
+
+<div class="book-edit-wrap col-sm-3">
     <?=
     Nav::widget(
         [
             'options' => [
-                'class' => ['nav nav-pills nav-stacked col-sm-3'],
+                'class' => ['nav nav-pills nav-stacked'],
 
             ],
             'activateItems' => true,
             'encodeLabels' => false,
 
             'items' => [
+                '<li class="divider">General</li>',
                 [
                     'label' => 'Genre ' . Icon::show('plus'),
-                    'url' => \yii\helpers\Url::to(['/book/edit/' . $_GET['id'] . '/genre'])
+                    'url' => \yii\helpers\Url::to(['/book/edit/' . $book_id . '/genre'])
                 ],
                 [
-                    'label' => 'Description ' . Icon::show('minus'),
-                    'url' => \yii\helpers\Url::to(['/book/edit/' . $_GET['id'] . '/description'])
+                    'label' => 'Description ' . Icon::show('plus'),
+                    'url' => \yii\helpers\Url::to(['/book/edit/' . $book_id . '/description'])
                 ],
                 [
-                    'label' => 'Illustration & Cover '  . Icon::show('minus'),
-                    'url' => \yii\helpers\Url::to(['/book/edit/' . $_GET['id'] . '/illustration'])
+                    'label' => 'Illustrations & Cover '  . Icon::show('plus'),
+                    'url' => \yii\helpers\Url::to(['/book/edit/' . $book_id . '/illustration'])
                 ],
+                '<li class="divider">Presentation of the book</li>',
                 [
-                    'label' => 'Detailed Description ' . Icon::show('minus'),
+                    'label' => 'Detailed Description ' . Icon::show('plus'),
                     'url' => ['#'],
                 ],
+                '<li class="divider">Additional Settings</li>',
                 [
-                    'label' => 'Content Protection ' . Icon::show('minus'),
+                    'label' => 'Content Protection ' . Icon::show('plus'),
                     'url' => ['#'],
                 ],
+                '<li class="divider">Sale</li>',
                 [
-                    'label' => 'Pricing ' . Icon::show('minus'),
+                    'label' => 'Pricing ' . Icon::show('plus'),
                     'url' => ['#'],
                 ],
             ],
 
         ]
     )
-    ?>
+?>
+    <div class="form-group" style="margin-top: 10px;">
+
+        <?= Html::a('Write Book', ['/book/write/' . $book_id . '/index'], ['class'=>'btn btn-primary']) ?>
+    </div>
+</div>
     <div class="book-edit-content col-sm-9">
     <?= $content ?>
     </div>

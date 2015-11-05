@@ -18,6 +18,8 @@ class ProfileForm extends Model
 
     public $user_email;
 
+    public $filename;
+
 //    public $verifyCode;
 
     /**
@@ -66,18 +68,20 @@ class ProfileForm extends Model
     {
         $this->user_first_name = $model->user_first_name;
         $this->user_last_name = $model->user_last_name;
-//        echo $model->user_image_url; exit();
-        //$this->user_image->name = $model->user_image_url;
-
-        //$this->user_image->extension = '';
     }
 
     public function upload()
     {
         if ($this->validate()) {
             if ($this->user_image->baseName != '')
-                $this->user_image->saveAs('X:/OpenServer/domains/putptp/uploads/user/image/' . $this->user_image->baseName . '.' . $this->user_image->extension);
-            $this->user_image = $this->user_image->baseName . $this->user_image->extension;
+            {
+                if (empty($this->filename))
+                    $this->filename = self::getRandomFileName();
+
+                $uploaddir = Yii::$app->params['uploadRoot'] . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR;
+                $this->user_image->saveAs($uploaddir . $this->filename . '.' . $this->user_image->extension);
+            }
+            $this->user_image = $this->filename . $this->user_image->extension;
             return true;
         } else {
             return false;
@@ -86,11 +90,9 @@ class ProfileForm extends Model
 
     public function edit()
     {
-        if ($user = $this->populate()) {
-            return $user;
+        if ($settings = $this->populate()) {
+            return $settings;
         }
-
-        //return $user;
         return null;
     }
 
@@ -109,8 +111,12 @@ class ProfileForm extends Model
                 $settings->user_first_name = $this->user_first_name;
                 //$user->user_middle_name = $this->user_middle_name;
                 $settings->user_last_name = $this->user_last_name;
-                if ($this->user_image->baseName != '')
-                    $settings->user_image_url = $this->user_image->baseName. '.' . $this->user_image->extension;
+
+
+                if (empty($this->filename))
+                    $this->filename = self::getRandomFileName();
+
+                $settings->user_image_url = $this->filename . '.' . $this->user_image->extension;
 
                 if ($settings->update())
                 {
@@ -119,5 +125,14 @@ class ProfileForm extends Model
             //}
         }
         return false;
+    }
+
+    public function getRandomFileName()
+    {
+        do {
+            $name = substr(md5(microtime() . rand(0, 9999)), 0, 10);
+        } while (UserSettings::findOne(['user_image_url' => $name]));
+
+        return $name;
     }
 }
