@@ -4,8 +4,8 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=putptp',
-            'username' => 'root',
-            'password' => '',
+            'username' => 'ctrl',
+            'password' => 'Dgpo84',
             'charset' => 'utf8',
         ],
         'mailer' => [
@@ -32,6 +32,9 @@ return [
                 '<_m:[\w\-]+>' => '<_m>/default/index',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>' => '<_m>/<_c>/index',
             ],
+        ],
+        'ccyAgent' => [
+            'class' => 'common\components\ccy\ccyAgent',
         ],
         'cache' => [
             'class' => 'yii\caching\DummyCache',

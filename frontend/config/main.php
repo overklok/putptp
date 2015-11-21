@@ -27,6 +27,7 @@ return [
         'help' => [
             'class' => 'app\modules\help\Module',
         ],
+
     ],
     'components' => [
         'user' => [

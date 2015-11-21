@@ -12,7 +12,6 @@
   Options -Indexes
 </IfModule>
 
-
 # Block access to "hidden" directories whose names begin with a period. This
 # includes directories used by version control systems such as Subversion or Git.
 <IfModule mod_rewrite.c>
@@ -38,6 +37,10 @@
 
 # Settings to hide index.php and ensure pretty urls
 RewriteEngine on
+
+#RewriteCond %{HTTP_REFERER} !^http://(www\.)?putptp [NC]
+#RewriteCond %{HTTP_REFERER} !^http://(www\.)?putptp.*$ [NC]
+#RewriteRule \.(jpg|png)$ - [F]
 
 # if a directory or a file exists, use it directly
 RewriteCond %{REQUEST_FILENAME} !-f

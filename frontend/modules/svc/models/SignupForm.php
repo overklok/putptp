@@ -127,7 +127,6 @@ class SignupForm extends Model
             if ($user->save()) {
                 $settings = new UserSettings();
                 $settings->user_id = $user->user_id;
-                $settings->user_image_url = 'saki.png';//$this->user_image;
 
                 if ($settings->save())
                 {

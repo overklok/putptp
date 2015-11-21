@@ -4,11 +4,11 @@ namespace app\modules\book\controllers;
 
 use common\modules\book\models\Book;
 use common\modules\book\models\BookIll;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
+use yii\web\HttpException;
 use yii\web\UploadedFile;
 
 class IllController extends Controller
@@ -45,7 +45,7 @@ class IllController extends Controller
         $book = Book::findOne($id);
 
         if($book->author_id != Yii::$app->user->identity->getId())
-            throw new AccessDeniedException("You have not access to this action.");
+            throw new HttpException(401, "You have not access to this action.");
 
         $folder = Yii::$app->params['uploadRoot'] . DIRECTORY_SEPARATOR . 'book' . DIRECTORY_SEPARATOR . $book->settings->book_images_cat;
 

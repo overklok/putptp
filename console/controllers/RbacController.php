@@ -67,7 +67,7 @@ class RbacController extends Controller
 
         $rbac->assign(
             $admin,
-            User::findOne(['user_name' => 'supafucka'])->user_id
+            User::findOne(['user_name' => 'sanekmolodoy'])->user_id
         );
     }
 }

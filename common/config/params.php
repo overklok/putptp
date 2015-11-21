@@ -2,6 +2,8 @@
 return [
     'uploadRoot' => 'uploads',
 
+    'user_default_image' => 'missing_user.png',
+
     'maxChaps' => 20,
 
     'adminEmail' => 'john_overklok@yahoo.com',

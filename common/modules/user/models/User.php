@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['user_name', 'required'],
-            ['user_name', 'match', 'pattern' => '#^[\w_-]+$#i'],
+            ['user_name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => 'User name can only contain alphanumeric characters, underscores and dashes.'],
             ['user_name', 'unique', 'targetClass' => self::className(), 'message' => 'This username has already been taken.'],
             ['user_name', 'string', 'min' => 2, 'max' => 255],
 

@@ -1,0 +1,264 @@
+body {
+	background-color: #eeeeee;
+	max-width: 1920px;
+	margin: auto;
+}
+
+.p_jumbotron {
+	overflow: hidden;
+	margin: 0;
+	padding-bottom: 0;
+	width: 100%;
+	height: 480px;
+	background-image: url("images/head_bg.png");
+    background-position:50% 50%;
+	position: relative;
+	top: 0%;
+	left: 0%;}
+
+.p_title {
+ 	color: white;
+ 	font-size: 20px;
+ 	font-family: Arial;
+ 	position: absolute;
+ 	left: 6%;
+ 	top: 4%;
+ 	margin: 0px;}
+
+ .p_jumbotron h1.p_welcome {
+	color: white;
+    font-size: 65px;
+    font-family: Franklin Gothic Medium;
+    position: relative;
+    top: 100px;
+    width: 100%;
+	text-align: center;}
+
+
+.p_jumbotron h2.p_welcome {
+	color: white;
+	font-family: Franklin Gothic Medium;
+	font-size: 20px;
+	position: relative;
+    width: 100%;
+    top: 20%;
+	text-align: center;}
+
+.p_logo4 {
+	position: absolute;
+	left: 2%;
+	top: 2%;
+}
+
+.p_jumbotron .p_box-start {
+	width: 100%;
+	height: 72px;
+    display: inline;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 0;
+}
+
+.p_jumbotron .p_buttonwrapper-hiw{
+	width: 200px;
+	margin:auto;
+}
+
+.p_jumbotron .p_buttonwrapper-start{
+	width: 450px;
+	margin:auto;
+}
+
+.p_button-start-form {
+	display: inline;
+}
+
+.p_jumbotron .p_button-start{
+ 	text-decoration: none;
+ 	font-size: 20px;
+	font-family: Arial;
+	text-align: center;
+	color: white;
+	width: 200px;
+	padding: 12px;
+	margin: 10px 10px;
+	background-color: #ff5a5f;
+	border: none;
+	cursor: pointer;
+}
+
+.p_jumbotron .button-hiw {
+	text-decoration: none;
+	font-size: 20px;
+	font-family: Arial;
+	text-align: center;
+	color: white;
+	width: 200px;
+	padding: 12px;
+	background-color: rgba(255,255,255,0.5);
+	position: absolute;
+	top: 62%;
+	border: none;
+	cursor: pointer;
+}
+
+.p_box-book_title{
+	padding: 40px;
+}
+
+.p_title1 {
+	font-family: Arial;
+	color: #535151;
+	font-size: 50px;
+	width: 100%;
+	text-align: center;
+}
+
+.p_title2 {
+	font-family: Arial;
+	color: #646161;
+	font-size: 23px;
+	font-family: Calibri;
+	width: 100%;
+	text-align: center;
+}
+
+.p_books {
+  /* Компенсируем отступы между float-блоками, чтобы они занимали все доступное пространство */
+	margin: 0 10%;
+	padding: 0 5%;
+	/* Выравнивание по центру */
+	text-align: center;
+}
+
+.p_thumb-book_small {
+	/* Правило для Firefox 2 */
+	display: -moz-inline-box;
+
+	/* а это для остальных */
+	display: inline-block;
+
+	vertical-align: top;
+
+	/* Убираем выравнивание по центру */
+	text-align: left;
+
+	/* Отступы между блоками */
+	margin: 5px;
+	background-color: black;
+	height: 200px;
+	width: 200px;
+}
+
+.p_thumb-book_small img{
+    height: 200px;
+    width: 200px;
+    vertical-align: middle;
+}
+
+.p_thumb-book_medium {
+	/*overflow: hidden*/;
+	/* Правило для Firefox 2 */
+	display: -moz-inline-box;
+
+	/* а это для остальных */
+	display: inline-block;
+
+	vertical-align: top;
+
+	/* Убираем выравнивание по центру */
+	text-align: left;
+
+	/* Отступы между блоками */
+	margin: 5px;
+	background-color: black;
+	height: 200px;
+	width: 410px;
+}
+
+.p_thumb-book_medium img{
+    height: 200px;
+    width: 410px;
+    vertical-align: middle;
+}
+
+.p_alert {
+    position: absolute;
+    top: 0;
+}
+
+.p_container {
+    padding: 0;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.p_footer {
+	width: 100%;
+	height: 200px;
+	margin-top: 2%;
+	background-image: url("images/footer.png");
+	background-size: contain;
+	left: 0%;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.p_company {
+	color: white;
+
+	position: absolute;
+	left: 50%;
+	font-size: 20px;
+	font-family: Arial;
+}
+
+.p_discover {
+	color: white;
+	position: absolute;
+	left: 70%;
+	font-size: 20px;
+	font-family: Arial;
+}
+
+.navbar-brand {
+	padding-top: 6px;
+}
+
+img.p_img-nav_logo {
+	width: 38px;
+    float: left;
+    position: relative;
+    top: 3px;
+}
+
+span.p_title-nav_logo {
+	padding: 14px;
+    position: relative;
+    top: 10px;
+}
+
+.navbar-inverse {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.navbar-inverse.sticky {
+  position: fixed;
+  font-size: 24px;
+  line-height: 48px;
+  height: 48px;
+  width: 100%;
+  background: #efc47D;
+  text-align: left;
+  padding-left: 20px;
+}
+
+a.info {
+	color: #FFFFFF;
+   	font-size: 40px;
+   	font-weight: bold;
+   	font-family: Franklin Gothic Medium;
+
+}

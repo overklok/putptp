@@ -88,7 +88,7 @@ class EditController extends Controller
         }
     }
 
-    public function actionDetDescription($id)
+    public function actionDetDesc($id)
     {
         $this->layout = 'edit';
 
@@ -102,7 +102,7 @@ class EditController extends Controller
         }
         else
         {
-            return $this->render('det-description', [
+            return $this->render('det-desc', [
                 'model' => $model,
             ]);
         }

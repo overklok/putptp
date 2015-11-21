@@ -13,7 +13,7 @@ class m151029_183534_init_book_ill extends Migration
             'book_id' => $this->integer()->notNull(),
         ]);
 
-        $this->addForeignKey('FK_book_file-book', 'book_file', 'book_id', 'book', 'book_id');
+        $this->addForeignKey('FK_book_ill-book', 'book_ill', 'book_id', 'book', 'book_id');
     }
 
     public function down()

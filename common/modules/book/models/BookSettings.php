@@ -2,7 +2,7 @@
 
 namespace common\modules\book\models;
 
-use Symfony\Component\Finder\Expression\Expression;
+
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;

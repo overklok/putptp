@@ -70,13 +70,18 @@ class Book extends \yii\db\ActiveRecord
             ['book_type_id', 'integer'],
             ['book_type_id', 'in', 'range' => array_keys(self::getBookTypesArray())],
 
-            [['book_title', 'book_description'], 'string', 'max' => 255],
-            ['book_title', 'unique', 'targetClass' => self::className(), 'message' => 'This title has already been taken.'],
+            ['book_title', 'unique', 'targetClass' => self::className(), 'message' => 'This title is already taken by you.', 'targetAttribute' => ['book_title', 'author_id']],
+
+            ['book_title', 'string', 'max' => 50],
             ['book_title', 'string', 'min' => 2, 'max' => 255],
+            ['book_title', 'match', 'pattern' => '/^[ a-zA-Z0-9_-]+$/', 'message' => 'Book title can only contain alphanumeric characters, spaces, underscores and dashes.'],
+
+            ['book_description', 'string', 'max' => 250],
 
             ['book_status', 'integer'],
             ['book_status', 'default', 'value' => self::STATUS_ACTIVE],
             ['book_status', 'in', 'range' => array_keys(self::getStatusesArray())],
+
         ];
     }
 

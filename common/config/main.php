@@ -3,7 +3,9 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'defaultRoute' => 'main/default/index',
     'modules' => [
-        
+        'globals' => [
+            'class' => 'common\modules\globals\GlobalsModule',
+        ],
     ],
 
     'components' => [

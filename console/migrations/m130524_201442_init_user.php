@@ -25,6 +25,9 @@ class m130524_201442_init_user extends Migration
             'user_email_confirm_token' => $this->string(),
             'user_status' => $this->smallInteger()->notNull()->defaultValue(1),
             'user_DOB' => $this->date()->notNull(),
+
+            'user_balance' => $this->decimal(10,4)->notNull()->defaultValue(0.0),
+
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);

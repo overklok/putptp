@@ -1,0 +1,75 @@
+.third-effect .mask-small .mask-medium {
+   opacity: 0;
+   overflow:visible;
+   border:100px solid rgba(0,0,0,0.7);
+   box-sizing:border-box;
+   transition: all 0.4s ease-in-out;
+}
+
+.third-effect a.info {
+   position:relative;
+   top: auto; /* Center the link */
+   opacity: 0;
+   transition: opacity 0.5s 0s ease-in-out;
+}
+
+.third-effect:hover .mask-small .mask-medium {
+   opacity: 1;
+   border:100px solid rgba(0,0,0,0.7);
+}
+
+.third-effect:hover a.info {
+   opacity:1;
+   transition-delay: 0.3s;
+}
+
+.view-small {
+   /*float: left;*/
+   overflow: hidden;
+   position: relative;
+   text-align: center;
+   box-shadow: 0px 0px 5px #aaa;
+   cursor: default;
+}
+
+.view-medium {
+   /*float: left;*/
+   overflow: hidden;
+   position: relative;
+   text-align: center;
+   box-shadow: 0px 0px 5px #aaa;
+   cursor: default;
+}
+
+.view-small .mask-small, .content-small {
+   width: 200px;
+   height: 200px;
+   position: absolute;
+   overflow: hidden;
+   top: 0;
+   left: 0;
+}
+
+.view-medium .mask-medium, .content-medium {
+   width: 410px;
+   height: 200px;
+   position: absolute;
+   overflow: hidden;
+   top: 0;
+   left: 0;
+}
+
+.view-small .view-medium img {
+   display: block;
+   position: relative;
+}
+
+.view-small .view-medium a.info {
+   background:url(../img/link.png) center no-repeat;
+   display: inline-block;
+   text-decoration: none;
+   padding:0;
+   text-indent:-9999px;
+   width:20px;
+   height:20px;
+}

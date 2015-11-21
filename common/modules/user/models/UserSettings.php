@@ -75,12 +75,21 @@ class UserSettings extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['user_id' => 'user_id']);
     }
 
+    public function getImage()
+    {
+        if (empty($this->user_image_url))
+            return false;
+
+        return '/' . Yii::$app->params['uploadRoot'] . '/' . 'user' . '/' . 'image' .
+        '/' . $this->user_image_url;
+    }
+
     public function deleteImage()
     {
         if (empty($this->user_image_url))
             return false;
 
-        if (unlink( '/' . Yii::$app->params['uploadRoot'] . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR . 'image' .
+        if (unlink(Yii::$app->params['uploadRoot'] . DIRECTORY_SEPARATOR . 'user' . DIRECTORY_SEPARATOR . 'image' .
             DIRECTORY_SEPARATOR . $this->user_image_url))
             return false;
 

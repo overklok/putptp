@@ -11,10 +11,13 @@ use Yii;
 
 class WriteController extends \yii\web\Controller
 {
-    public function actionIndex($id, $chap = 1)
+    public function actionIndex($id, $chap = 0)
     {
         $modelNewChap = $this->newChapModel($id);
         $modelNewChap->book_id = $id;
+
+        if ($chap == 0)
+            $chap = $modelNewChap->firstChapter();
 
         if($modelNewChap->load(Yii::$app->request->post()))
         {

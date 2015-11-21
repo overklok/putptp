@@ -12,6 +12,7 @@ class m151104_173413_init_book_chapter extends Migration
             'book_id' => $this->integer()->notNull(),
             'chapter_title' => $this->string(256)->defaultValue('NEW_CHAP'),
             'chapter_content' => $this->text(),
+            'chapter_status' => $this->integer()->notNull()->defaultValue(2),
 
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
